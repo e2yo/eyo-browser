@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Восстановление буквы «ё» в текстах</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./build/index.min.css" />
+</head>
+<body>
+    <h1 class="eyo__header">Восстановление буквы «ё» в текстах</h1>
+    <div class="eyo">
+        <div class="eyo__text">Текст:</div>
+        <div contenteditable="true" class="eyo__input">Не стекло и не хрусталь,<br/>
+А блестит, как будто сталь.<br/>
+Занесешь в тепло, домой.<br/>
+Станет сразу он водой.<br/>
+Холод от него идет.<br/>
+Ну конечно это...<br/>
+(Лед)</div>
+        <input class="eyo__button" title="CTRL+Enter" type="button" value="Восстановить" />
+        <div class="eyo__replacement"></div>
+    </div>
+    <script src="build/index.min.js"></script>
+</html>

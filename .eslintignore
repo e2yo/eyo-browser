@@ -1,0 +1,5 @@
+gulpfile.js
+.*
+coverage/**
+build/**
+node_modules/**
