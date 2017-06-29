@@ -9,6 +9,11 @@ const cleancss = require('gulp-cleancss');
 const autoprefixer = require('gulp-autoprefixer');
 const source = require('vinyl-source-stream');
 const streamify = require('gulp-streamify');
+const Packer = require('./tools/packer');
+
+const src = './src/';
+const dest = './build/';
+const dict = './node_modules/eyo-kernel/dict/';
 
 const uglifyOptions = {
 	output: {
@@ -18,32 +23,35 @@ const uglifyOptions = {
 };
 
 gulp.task('js', function() {
-    return browserify(['src/index.js'])
+    return browserify([`${src}index.js`])
         .transform('babelify', {
             global: true,
             presets: [['es2015', {loose: true}]]
         })
         .bundle()
         .pipe(source('index.min.js'))
-        .pipe(streamify(uglify(uglifyOptions)))
-        .pipe(gulp.dest('./build'));
+        //.pipe(streamify(uglify(uglifyOptions)))
+        .pipe(gulp.dest(dest));
 });
 
-gulp.task('dict', function() {
-    return gulp.src('./node_modules/eyo-kernel/dict/safe.txt')
-       .pipe(gulp.dest('build/'));
+gulp.task('safe-dict', function() {
+    new Packer(`${dict}safe.txt`, `${dest}safe.min.txt`);
+});
+
+gulp.task('unsafe-dict', function() {
+    new Packer(`${dict}not_safe.txt`, `${dest}unsafe.min.txt`);
 });
 
 gulp.task('css', function() {
-    return gulp.src('src/index.css')
-       .pipe(autoprefixer())
-       .pipe(cleancss())
-       .pipe(rename('index.min.css'))
-       .pipe(gulp.dest('build/'));
+    return gulp.src(`${src}index.css`)
+           .pipe(autoprefixer())
+           .pipe(cleancss())
+           .pipe(rename('index.min.css'))
+           .pipe(gulp.dest(dest));
 });
 
 gulp.task('html', function() {
-    return gulp.src('src/index.html')
+    return gulp.src(`${src}index.html`)
        .pipe(gulp.dest('./'));
 });
 
@@ -51,4 +59,4 @@ gulp.task('watch', function() {
     gulp.watch('src/**/*', ['default']);
 });
 
-gulp.task('default', ['js', 'css', 'html', 'dict']);
+gulp.task('default', ['js', 'css', 'html', 'safe-dict', 'unsafe-dict']);

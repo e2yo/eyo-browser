@@ -1,31 +1,43 @@
 'use strict';
 
 const Eyo = require('eyo-kernel');
-const eyoBro = new Eyo();
+const depack = require('./depack');
+const safeEyo = new Eyo();
+const unsafeEyo = new Eyo();
 
 const input = document.querySelector('.eyo__input');
 const button = document.querySelector('.eyo__button');
-const replacement = document.querySelector('.eyo__replacement');
+const safeReplacement = document.querySelector('.eyo__safe');
+const unsafeReplacement = document.querySelector('.eyo__unsafe');
 
-const req = new XMLHttpRequest();
-req.addEventListener('load', function() {
-    eyoBro.dictionary.set(req.responseText);
+const safeReq = new XMLHttpRequest();
+safeReq.addEventListener('load', function() {
+    safeEyo.dictionary.set(depack(safeReq.responseText).join('\n'));
 });
 
-req.open('GET', './build/safe.txt', true);
-req.send();
+safeReq.open('GET', './build/safe.min.txt', true);
+safeReq.send();
+
+const unsafeReq = new XMLHttpRequest();
+unsafeReq.addEventListener('load', function() {
+    unsafeEyo.dictionary.set(depack(unsafeReq.responseText).join('\n'));
+});
+
+unsafeReq.open('GET', './build/unsafe.min.txt', true);
+unsafeReq.send();
 
 input.focus();
 button.addEventListener('click', function() {
-    let count = 0;
-    let text = input.innerHTML.replace(/<span class="eyo__ok">([ёЁ])<\/span>/g, '$1');
-    let newText = eyoBro.restore(text);
+    let safeCount = 0;
+    let unsafeCount = 0;
+    let text = input.innerHTML.replace(/<span class="eyo__[^>]+?>([еЕёЁ])<\/span>/g, '$1');
+    let newText = safeEyo.restore(text);
     let result = [];
 
     for (let i = 0; i < text.length; i++) {
         if (text[i] !== newText[i]) {
-            result.push('<span class="eyo__ok">' + newText[i] + '</span>');
-            count++;
+            result.push('<span class="eyo__ok" title="Безопасная замена">' + newText[i] + '</span>');
+            safeCount++;
         } else {
             result.push(text[i]);
         }
@@ -33,5 +45,6 @@ button.addEventListener('click', function() {
 
     input.innerHTML = result.join('');
 
-    replacement.innerHTML = 'Замен: ' + count;
+    safeReplacement.innerHTML = 'Замен: <span class="eyo__safe-count">' + safeCount + '</span>';
+    unsafeReplacement.innerHTML = 'Предупреждений: <span class="eyo__unsafe-count">' + unsafeCount + '</span>';
 }, false);
