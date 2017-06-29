@@ -67,6 +67,13 @@ body {
     box-shadow: 0 5px 10px rgba(0,0,0,.15);
 }
 
+@media all and (max-width: 500px)
+{
+    .eyo__header {
+        font-size: 14px;
+    }
+}
+
 .eyo__safe,
 .eyo__unsafe {
     font-size: 14px;

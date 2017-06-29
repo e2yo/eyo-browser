@@ -30,7 +30,7 @@ input.focus();
 button.addEventListener('click', function() {
     let safeCount = 0;
     let unsafeCount = 0;
-    let text = input.innerHTML.replace(/<span class="eyo__[^>]+?>([еЕёЁ])<\/span>/g, '$1');
+    let text = input.innerText;
     let newText = safeEyo.restore(text);
     let result = [];
 
@@ -43,7 +43,7 @@ button.addEventListener('click', function() {
         }
     }
 
-    input.innerHTML = result.join('');
+    input.innerHTML = result.join('').replace(/\r?\n/g, '<br/>\n');
 
     safeReplacement.innerHTML = 'Замен: <span class="eyo__safe-count">' + safeCount + '</span>';
     unsafeReplacement.innerHTML = 'Предупреждений: <span class="eyo__unsafe-count">' + unsafeCount + '</span>';
