@@ -15,10 +15,16 @@ body {
     left: 30px;
 }
 
-.eyo__ok {
+.eyo__safe-word {
     font-weight: bold;
 
     color: green;
+}
+
+.eyo__unsafe-word {
+    font-weight: bold;
+
+    color: red;
 }
 
 .eyo__input {

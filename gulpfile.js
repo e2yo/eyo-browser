@@ -30,7 +30,7 @@ gulp.task('js', function() {
         })
         .bundle()
         .pipe(source('index.min.js'))
-        //.pipe(streamify(uglify(uglifyOptions)))
+        .pipe(streamify(uglify(uglifyOptions)))
         .pipe(gulp.dest(dest));
 });
 

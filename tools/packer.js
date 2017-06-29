@@ -77,6 +77,6 @@ class Packer {
 
         return [word, ''];
     }
-};
+}
 
 module.exports = Packer;
