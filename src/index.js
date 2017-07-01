@@ -1,7 +1,6 @@
 'use strict';
 
 const Eyo = require('eyo-kernel');
-const depack = require('./depack');
 
 const App = {
     init: function() {
@@ -26,16 +25,16 @@ const App = {
     loadDicts: function() {
         this._safeReq = new XMLHttpRequest();
         this._safeReq.addEventListener('load', () => {
-            this._safeEyo.dictionary.set(depack(this._safeReq.responseText).join('\n'));
+            this._safeEyo.dictionary.set(this._safeReq.responseText);
         });
-        this._safeReq.open('GET', './build/safe.min.txt', true);
+        this._safeReq.open('GET', './build/safe.txt', true);
         this._safeReq.send();
 
         this._unsafeReq = new XMLHttpRequest();
         this._unsafeReq.addEventListener('load', () => {
-            this._unsafeEyo.dictionary.set(depack(this._unsafeReq.responseText).join('\n'));
+            this._unsafeEyo.dictionary.set(this._unsafeReq.responseText);
         });
-        this._unsafeReq.open('GET', './build/unsafe.min.txt', true);
+        this._unsafeReq.open('GET', './build/not_safe.txt', true);
         this._unsafeReq.send();
     },
     _prepareLintData: function(text) {

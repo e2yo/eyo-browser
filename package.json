@@ -30,7 +30,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
     "eslint": "^4.1.1",
-    "eyo-kernel": "~2.0.3",
+    "eyo-kernel": "~2.1.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-cleancss": "^0.2.2",

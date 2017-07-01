@@ -9,7 +9,6 @@ const cleancss = require('gulp-cleancss');
 const autoprefixer = require('gulp-autoprefixer');
 const source = require('vinyl-source-stream');
 const streamify = require('gulp-streamify');
-const Packer = require('./tools/packer');
 
 const src = './src/';
 const dest = './build/';
@@ -35,11 +34,13 @@ gulp.task('js', function() {
 });
 
 gulp.task('safe-dict', function() {
-    new Packer(`${dict}safe.txt`, `${dest}safe.min.txt`);
+    return gulp.src(`${dict}safe.txt`)
+                .pipe(gulp.dest(dest));
 });
 
-gulp.task('unsafe-dict', function() {
-    new Packer(`${dict}not_safe.txt`, `${dest}unsafe.min.txt`);
+gulp.task('not-safe-dict', function() {
+    return gulp.src(`${dict}not_safe.txt`)
+                .pipe(gulp.dest(dest));
 });
 
 gulp.task('css', function() {
@@ -59,4 +60,4 @@ gulp.task('watch', function() {
     gulp.watch('src/**/*', ['default']);
 });
 
-gulp.task('default', ['js', 'css', 'html', 'safe-dict', 'unsafe-dict']);
+gulp.task('default', ['js', 'css', 'html', 'safe-dict', 'not-safe-dict']);

@@ -38,11 +38,11 @@ body {
 
     padding: 10px;
 
-    border: 1px dotted #aaa;
+    border: 1px solid #eee;
 }
 
 .eyo__input:focus {
-    border: 1px solid #aaa;
+    border-color: #aaa;
 }
 
 .eyo__button {
