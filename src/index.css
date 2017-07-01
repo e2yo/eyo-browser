@@ -107,3 +107,9 @@ body {
     position: absolute;
     top: 0;
 }
+
+.eyo__example {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

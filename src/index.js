@@ -8,6 +8,21 @@ const App = {
         this._input.focus();
 
         this._button = document.querySelector('.eyo__button');
+
+        document.querySelector('.eyo__example').addEventListener('click', () => {
+            const text = [
+                'Не стекло и не хрусталь,',
+                'А блестит, как будто сталь.',
+                'Занесешь в тепло, домой.',
+                'Станет сразу он водой.',
+                'Холод от него идет.',
+                'Ну конечно это...',
+                '(Лед)'
+            ];
+
+            this._input.innerText = text.join('\n');
+        }, false);
+
         this._safeReplacement = document.querySelector('.eyo__safe');
         this._unsafeReplacement = document.querySelector('.eyo__unsafe');
         this._safeEyo = new Eyo();
@@ -64,18 +79,6 @@ const App = {
                 return -1;
             });
     },
-    getIndex(text, line, column) {
-        const buf = text.split('\n');
-        let index = 0;
-
-        for (let i = 0; i < line - 1; i++) {
-            if (typeof buf[i] !== 'undefined') {
-                index += buf[i].length + 1;
-            }
-        }
-
-        return index + column - 1;
-    },
     _onClick() {
         const text = this._input.innerText;
         const data = this._prepareLintData(text);
@@ -87,11 +90,10 @@ const App = {
             let start = 0;
             for (let item of data) {
                 let pos = item.position;
-                let index = this.getIndex(text, pos.line, pos.column);
                 let hl = this.highlight(item.before, item.after, item.unsafe);
 
-                result = result + text.substring(start, index) + hl.word;
-                start = index + item.before.length;
+                result = result + text.substring(start, pos.index) + hl.word;
+                start = pos.index + item.before.length;
                 if (item.unsafe) {
                     unsafeCount += hl.count;
                 } else {
