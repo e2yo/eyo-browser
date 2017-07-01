@@ -3,7 +3,7 @@
 const Eyo = require('eyo-kernel');
 
 const App = {
-    init: function() {
+    init() {
         this._input = document.querySelector('.eyo__input');
         this._input.focus();
 
@@ -22,7 +22,7 @@ const App = {
 
         this.loadDicts();
     },
-    loadDicts: function() {
+    loadDicts() {
         this._safeReq = new XMLHttpRequest();
         this._safeReq.addEventListener('load', () => {
             this._safeEyo.dictionary.set(this._safeReq.responseText);
@@ -37,35 +37,34 @@ const App = {
         this._unsafeReq.open('GET', './build/not_safe.txt', true);
         this._unsafeReq.send();
     },
-    _prepareLintData: function(text) {
+    _prepareLintData(text) {
         const safeLint = this._safeEyo.lint(text);
         const unsafeLint = this._unsafeEyo.lint(text);
 
-        unsafeLint.forEach(item => {
+        for (let item of unsafeLint) {
             item.unsafe = true;
-        });
+        }
 
-        const lint = [].concat(safeLint, unsafeLint);
-        lint.sort(function(a, b) {
-            const posA = a.position;
-            const posB = b.position;
+        return []
+            .concat(safeLint, unsafeLint)
+            .sort(function(a, b) {
+                const posA = a.position;
+                const posB = b.position;
 
-            if (posA.line > posB.line) {
-                return 1;
-            } else if (posA.line < posB.line) {
+                if (posA.line > posB.line) {
+                    return 1;
+                } else if (posA.line < posB.line) {
+                    return -1;
+                }
+
+                if (posA.column > posB.column) {
+                    return 1;
+                }
+
                 return -1;
-            }
-
-            if (posA.column > posB.column) {
-                return 1;
-            }
-
-            return -1;
-        });
-
-        return lint;
+            });
     },
-    getIndex: function(text, line, column) {
+    getIndex(text, line, column) {
         const buf = text.split('\n');
         let index = 0;
 
@@ -77,7 +76,7 @@ const App = {
 
         return index + column - 1;
     },
-    _onClick: function() {
+    _onClick() {
         const text = this._input.innerText;
         const data = this._prepareLintData(text);
         let safeCount = 0;
@@ -99,7 +98,7 @@ const App = {
                     safeCount += hl.count;
                 }
             }
-            
+
             result += text.substring(start);
         } else {
             result = text;
@@ -110,7 +109,7 @@ const App = {
         this._safeReplacement.innerHTML = 'Замен: <span class="eyo__safe-count">' + safeCount + '</span>';
         this._unsafeReplacement.innerHTML = 'Предупреждений: <span class="eyo__unsafe-count">' + unsafeCount + '</span>';
     },
-    highlight: function(before, after, isUnsafe) {
+    highlight(before, after, isUnsafe) {
         let count = 0;
         let word = '';
 
