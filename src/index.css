@@ -31,7 +31,7 @@ body {
     position: absolute;
     top: 30px;
     right: 0;
-    bottom: 35px;
+    bottom: 75px;
     left: 0;
 
     overflow: auto;
@@ -47,8 +47,9 @@ body {
 
 .eyo__button {
     position: absolute;
-    bottom: 0;
+    bottom: 35px;
     left: 0;
+    font-size: 1.2em;
 }
 
 .eyo__header {
@@ -86,13 +87,13 @@ body {
 
     position: absolute;
     right: 0;
-    bottom: 1em;
+    bottom: 50px;
 
     color: #aaa;
 }
 
 .eyo__unsafe {
-    bottom: -0.5em;
+    bottom: 30px;
 }
 
 .eyo__safe-count {
@@ -112,4 +113,20 @@ body {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.eyo__footer {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    bottom: -10px;
+    padding: 5px 0 0 0;
+    border-top: 1px solid #eee;
+
+    font-size: 12px;
+    text-align: right;
+}
+
+.eyo__footer-link {
+    margin-left: 1em;
 }
