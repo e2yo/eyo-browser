@@ -3,7 +3,7 @@
 <head>
     <title>Восстановление буквы «ё» в текстах</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="./build/index.min.css" />
+    <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>" />
 </head>
 <body>
     <h1 class="eyo__header">Восстановление буквы «ё» в текстах</h1>
@@ -21,5 +21,5 @@
             <a class="eyo__footer-link" href="https://github.com/hcodes/yaspeller/">YaSpeller</a>
         </div>
     </div>
-    <script src="build/index.min.js"></script>
+    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </html>

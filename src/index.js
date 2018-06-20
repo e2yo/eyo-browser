@@ -1,6 +1,7 @@
 'use strict';
 
-const Eyo = require('eyo-kernel');
+import Eyo from 'eyo-kernel';
+import './index.css';
 
 const App = {
     init() {
@@ -8,7 +9,7 @@ const App = {
         this._input.focus();
 
         this._button = document.querySelector('.eyo__button');
-
+        
         document.querySelector('.eyo__example').addEventListener('click', () => {
             const text = [
                 'Не стекло и не хрусталь,',
@@ -39,17 +40,19 @@ const App = {
     },
     loadDicts() {
         this._safeReq = new XMLHttpRequest();
+        this._safeReq.responseType = 'text';
         this._safeReq.addEventListener('load', () => {
             this._safeEyo.dictionary.set(this._safeReq.responseText);
         });
-        this._safeReq.open('GET', './build/safe.txt', true);
+        this._safeReq.open('GET', './dist/safe.txt', true);
         this._safeReq.send();
 
         this._unsafeReq = new XMLHttpRequest();
+        this._unsafeReq.responseType = 'text';
         this._unsafeReq.addEventListener('load', () => {
             this._unsafeEyo.dictionary.set(this._unsafeReq.responseText);
         });
-        this._unsafeReq.open('GET', './build/not_safe.txt', true);
+        this._unsafeReq.open('GET', './dist/not_safe.txt', true);
         this._unsafeReq.send();
     },
     _prepareLintData(text) {
