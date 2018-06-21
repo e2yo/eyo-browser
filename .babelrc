@@ -1,10 +1,9 @@
 {
   "presets": [
-    ["env", {
-      "modules": false,
-      "targets": {
-        "browsers": ["> 1%", "IE 10"]
-      }
-    }]
-  ]
+    "env"
+  ],
+  "plugins": [
+    ["transform-react-jsx", { "pragma":"h" }],
+    "transform-object-rest-spread"
+  ]  
 }

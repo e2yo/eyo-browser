@@ -3,8 +3,6 @@
 const
     path = require('path'),
     MiniCssExtractPlugin = require('mini-css-extract-plugin'),
-    CopyWebpackPlugin = require('copy-webpack-plugin'),
-    CleanWebpackPlugin = require('clean-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     WebpackMd5Hash = require('webpack-md5-hash'),
     UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
@@ -20,17 +18,6 @@ module.exports = function(env, options) {
             filename: '[name].[chunkhash].js'
         },
         plugins: [
-            new CleanWebpackPlugin([
-                './dist'
-            ]),
-            new CopyWebpackPlugin([
-                {
-                    from: 'node_modules/eyo-kernel/dict/safe.txt'
-                },
-                {
-                    from: 'node_modules/eyo-kernel/dict/not_safe.txt'
-                }
-            ]),
             new MiniCssExtractPlugin({
                 filename: '[name].[contenthash].css'
             }),
@@ -70,8 +57,8 @@ module.exports = function(env, options) {
             ] : undefined
         },
         node: {
-          fs: 'empty',
-          path: 'empty'
+            fs: 'empty',
+            path: 'empty'
         }
     };
 };
