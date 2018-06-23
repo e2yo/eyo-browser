@@ -8,12 +8,10 @@ export default class ContentEditable extends Component {
     }
 
     render() {
-        const { tagName, html, onChange, ...props } = this.props;
-
         return h(
-            tagName || 'div',
+            this.props.tagName || 'div',
             {
-                ...props,
+                ...this.props,
                 onInput: this.emitChange,
                 onBlur: this.props.onBlur || this.emitChange,
                 contentEditable: !this.props.disabled,

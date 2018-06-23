@@ -168,14 +168,14 @@ class App extends Component {
         return <div>
             <a href="#" className="eyo__example" onClick={this.setExample}>Пример</a>
             <ContentEditable
-                class="eyo__input"
+                className="eyo__input"
                 autofocus={true}
                 html={state.html}
                 onKeyUp={this.onKeyUp}                
                 onChange={this.onChangeText} />
-            <input class="eyo__button" onClick={this.onClick} title="CTRL+Enter" type="button" value="Восстановить" />
-            <div class="eyo__safe" title="Безопасные замены">Замен: <span class="eyo__safe-count">{state.safeCount}</span></div>
-            <div class="eyo__unsafe" title="Предупреждения (небезопасные замены)">Предупреждений: <span class="eyo__unsafe-count">{state.unsafeCount}</span></div>
+            <input className="eyo__button" onClick={this.onClick} title="CTRL+Enter" type="button" value="Восстановить" />
+            <div className="eyo__safe" title="Безопасные замены">Замен: <span className="eyo__safe-count">{state.safeCount}</span></div>
+            <div className="eyo__unsafe" title="Предупреждения (небезопасные замены)">Предупреждений: <span className="eyo__unsafe-count">{state.unsafeCount}</span></div>
         </div>;
     }
 }

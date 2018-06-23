@@ -1,6 +1,6 @@
 {
     "parserOptions": {
-      "ecmaVersion": 6,
+      "ecmaVersion": 2018,
       "ecmaFeatures": {
         "jsx": true
       },
@@ -61,21 +61,14 @@
             "SwitchCase": 1
           }
         ],
-        "valid-jsdoc": [
-          2,
-          {
-            "prefer": {
-              "return": "returns"
-            },
-            "requireParamDescription": false,
-            "requireReturnDescription": false,
-            "requireReturn": false
-          }
-        ]
+        "react/prop-types": 0
     },
     "env": {
         "node": true,
         "browser": true
     },
-    "extends": "eslint:recommended"
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ]
 }
