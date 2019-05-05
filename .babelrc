@@ -1,9 +1,6 @@
 {
-  "presets": [
-    "env"
-  ],
+  "presets": ["@babel/preset-env"],
   "plugins": [
-    ["transform-react-jsx", { "pragma": "h" }],
-    "transform-object-rest-spread"
+    ["transform-react-jsx", { "pragma": "h" }]
   ]  
 }
